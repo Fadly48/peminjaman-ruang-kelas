@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ruangan', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_ruangan'); // Kolom nama_ruangan
-            $table->timestamps();
+        Schema::table('ruangan', function (Blueprint $table) {
+            $table->string('status')->default('tersedia');  // Menambahkan kolom 'status' dengan nilai default 'tersedia'
         });
     }
-    
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('ruangan');
+        Schema::table('ruangan', function (Blueprint $table) {
+            $table->dropColumn('status');  // Menghapus kolom 'status'
+        });
     }
 };

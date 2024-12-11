@@ -5,54 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
-<body>
-    <div class="d-flex" id="wrapper">
-        <div class="bg-primary text-white" id="sidebar" style="width: 250px; min-height: 100vh;">
-            <div class="p-4">
-                <h3 class="text-center mb-4">Dashboard</h3>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-3">
-                        <a href="peminjaman" class="nav-link text-white"><i class="fas fa-home me-2"></i> Home</a>
+<body class="bg-gray-100">
+
+    <!-- Main Container -->
+    <div class="flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="w-64 min-h-screen text-white shadow-lg bg-gradient-to-b from-blue-600 to-blue-400" id="sidebar">
+            <div class="p-6">
+                <h3 class="mb-6 text-3xl font-bold text-center">Dashboard</h3>
+                <ul class="space-y-4">
+                    <li class="nav-item">
+                        <a href="{{ route('peminjaman.index') }}" class="flex items-center p-3 text-lg text-white transition duration-300 ease-in-out rounded-lg hover:bg-blue-500">
+                            <i class="mr-3 fas fa-calendar-alt"></i> Peminjaman
+                        </a>
                     </li>
-                    <li class="nav-item mb-3">
-                        <a href="{{ route('ruangan.daftar') }}" class="nav-link text-white">
-                            <i class="fas fa-door-open me-2"></i> Ruangan
+                    <li class="nav-item">
+                        <a href="{{ route('ruangan.index') }}" class="flex items-center p-3 text-lg text-white transition duration-300 ease-in-out rounded-lg hover:bg-blue-500">
+                            <i class="mr-3 fas fa-door-open"></i> Ruangan
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="flex-grow-1 bg-light" style="min-height: 100vh;">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-danger px-3" href="#">Logout</a>
-                        </li>
-                    </ul>
+        <!-- Main Content -->
+        <div class="flex-1 min-h-screen bg-gray-50">
+            <!-- Navbar -->
+            <nav class="px-6 py-4 bg-white shadow-md">
+                <div class="flex items-center justify-between">
+                    <button class="text-gray-600 lg:hidden" type="button" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="flex items-center space-x-4">
+                        <a href="{{ route('index') }}" class="px-6 py-2 text-white transition duration-300 bg-red-600 rounded-md hover:bg-red-700">Logout</a>
+                    </div>
                 </div>
             </nav>
 
-            <div class="container py-4">
-                <h1 class="mb-4">@yield('title', 'Dashboard')</h1>
+            <!-- Content Section -->
+            <div class="container px-6 py-8">
+                <h1 class="mb-6 text-3xl font-semibold text-gray-800">@yield('title')</h1>
                 @yield('content')
             </div>
         </div>
     </div>
 
-    <footer class="bg-blue text-black text-center py-2">
-        <p class="mb-0">© Project By Fadly RPL 2©</p>
+    <!-- Footer -->
+    <footer class="py-4 mt-12 text-center text-white bg-blue-600">
+        <p class="mb-0 text-lg">© Project By Fadly RPL 2</p>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

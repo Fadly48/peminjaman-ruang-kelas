@@ -9,8 +9,17 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'tb_user';
-    protected $primarykey = 'user_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    protected $fillable = ['name', 'username', 'password'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

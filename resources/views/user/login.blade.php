@@ -1,35 +1,23 @@
 @extends('app')
 @section('content')
-    <div class="row">
-        <div class="col-md-6">
-            @if (session('succes'))
-                <p class="alert alert-danger">{{ session('succes') }}</p>
-            @endif
-            @if ($errors->any())
-                @foreach ($errors->all() as $err)
-                    <p class="alert alert-danger">{{ $err }}</p>
-                @endforeach
-            @endif
-            <form method="post" action="{{ route('login.action') }}">
-                @csrf
-                <div class="mb-3">
-                    <label>Username <span class="text-danger"></span></label>
-                    <input class="form-control" type="text" name="username" value="{{ old('username') }}">
-                </div>
-                <div class="mb-3">
-                    <label>Password <span class="text-danger"></span></label>
-                    <input class="form-control" type="password" name="password" />
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-primary">Login</button>
-                    <a class="btn btn-danger" href="/">Back</a>
-                </div>
-            </form>
-            <div class="mt-3">
-                <p>Belum punya akun? 
-                    <a href="{{ route('register') }}" class="btn btn-link">Registrasi</a>
-                </p>
-            </div>
+<div class="p-8 bg-white rounded-lg shadow-md w-96 mx-auto mt-16">
+    <h2 class="mb-6 text-2xl font-bold text-center">Login</h2>
+    <form action="{{ route('login') }}" method="POST">
+        @csrf
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" required class="block w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder="Email Anda">
         </div>
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password" name="password" required class="block w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder="Password Anda">
+        </div>
+        <button type="submit" class="w-full p-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Login</button>
+    </form>
+    <div class="mt-4 text-center">
+        <p class="text-sm text-gray-600">Belum punya akun?
+            <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Daftar di sini</a>
+        </p>
     </div>
+</div>
 @endsection

@@ -17,16 +17,15 @@ class UserController
     public function register_action(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:tb_user',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255', // Validasi email
+            'password' => 'required|string|min:8|confirmed', // Gunakan 'confirmed' untuk password confirmation
         ]);
 
         // Menyimpan data user baru
         $user = new User([
             'name' => $request->name,
-            'username' => $request->username,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
         $user->save();
@@ -40,10 +39,10 @@ class UserController
     public function login_action(Request $request)
     {
         $request->validate([
-            'username' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard/peminjaman');
         }

@@ -18,7 +18,7 @@ return new class extends Migration
         $table->date('tanggal_peminjaman');
         $table->time('waktu_mulai');
         $table->time('waktu_berakhir');
-        $table->string('status')->default('pending');
+        $table->enum('status', ['terpinjam', 'tersedia'])->default('tersedia');
         $table->timestamps();
     });
 }

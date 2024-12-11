@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <title>@yield('title', $title)</title>
+    <style>
+        body {
+            background: url('img/bg1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h1>@yield('title', $title)</h1>
+    <body class="flex items-center justify-center h-screen bg-gray-100">
         @yield('content')
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

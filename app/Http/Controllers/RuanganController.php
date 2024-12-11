@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ruangan;
+use Illuminate\Http\Request;
 
 class RuanganController extends Controller
 {
-    public function daftar()
+    // Menampilkan daftar ruangan
+    public function index()
     {
-        $ruangan = Ruangan::all();
-        return view('ruangan.daftar', compact('ruangan'));
+        $ruangan = Ruangan::all(); // Ambil semua data ruangan
+        return view('ruangan.index', compact('ruangan')); // Pastikan nama viewnya 'ruangan.index'
     }
 
+    // Menampilkan form untuk menambah ruangan
     public function create()
     {
-        return view('ruangan.create');
+        return view('ruangan.create'); // Pastikan file viewnya ada di resources/views/ruangan/create.blade.php
     }
 
+    // Menyimpan data ruangan baru
     public function store(Request $request)
     {
         $request->validate([
@@ -25,17 +28,21 @@ class RuanganController extends Controller
             'kapasitas' => 'nullable|integer|min:0',
         ]);
 
+        // Menyimpan data ruangan
         Ruangan::create($request->all());
 
+        // Redirect ke daftar ruangan setelah berhasil
         return redirect()->route('ruangan.index')->with('success', 'Ruangan berhasil ditambahkan.');
     }
 
+    // Menampilkan form untuk mengedit data ruangan
     public function edit($id)
     {
-        $ruangan = Ruangan::findOrFail($id);
-        return view('ruangan.edit', compact('ruangan'));
+        $ruangan = Ruangan::findOrFail($id); // Menemukan ruangan berdasarkan ID
+        return view('ruangan.edit', compact('ruangan')); // Pastikan file viewnya ada di resources/views/ruangan/edit.blade.php
     }
 
+    // Memperbarui data ruangan
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -43,18 +50,18 @@ class RuanganController extends Controller
             'kapasitas' => 'nullable|integer|min:0',
         ]);
 
-        $ruangan = Ruangan::findOrFail($id);
-        $ruangan->update($request->all());
+        $ruangan = Ruangan::findOrFail($id); // Menemukan ruangan berdasarkan ID
+        $ruangan->update($request->all()); // Mengupdate data ruangan
 
         return redirect()->route('ruangan.index')->with('success', 'Ruangan berhasil diupdate.');
     }
 
+    // Menghapus data ruangan
     public function destroy($id)
     {
-        $ruangan = Ruangan::findOrFail($id);
-        $ruangan->delete();
+        $ruangan = Ruangan::findOrFail($id); // Menemukan ruangan berdasarkan ID
+        $ruangan->delete(); // Menghapus data ruangan
 
         return redirect()->route('ruangan.index')->with('success', 'Ruangan berhasil dihapus.');
     }
 }
-

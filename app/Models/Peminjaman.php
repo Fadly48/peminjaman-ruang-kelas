@@ -12,11 +12,6 @@ class Peminjaman extends Model
     protected $table = 'peminjaman'; // Nama tabel di database
 
     protected $fillable = [
-        'nama_peminjam',
-        'ruang_kelas',
-        'tanggal_peminjaman',
-        'waktu_mulai',
-        'waktu_berakhir',
-        'status',
+        'nama_peminjam', 'ruang_kelas', 'tanggal_peminjaman', 'waktu_mulai', 'waktu_berakhir', 'status',
     ];
 }

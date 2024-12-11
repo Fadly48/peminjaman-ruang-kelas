@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Seeders;
-
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Database\Seeders\RuanganSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,15 +12,18 @@ class DatabaseSeeder extends Seeder
         // Membuat 10 pengguna menggunakan factory
         User::factory(10)->create();
 
-        // Atau membuat pengguna tertentu
+        // Membuat pengguna admin
         DB::table('users')->insert([
-            'name' => 'Dewayne Considine',
-            'email' => 'icrist@example.net',
-            'username' => 'dewayne_considine',  // Jangan lupa mengisi username
-            'password' => bcrypt('password123'),
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-    
+
+        // Memanggil RuanganSeeder
+        $this->call([
+            RuanganSeeder::class, // Pastikan ini ada
+        ]);
     }
 }
